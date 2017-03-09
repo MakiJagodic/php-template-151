@@ -1,8 +1,8 @@
 <?php
 
-namespace ihrname\Controller;
+namespace MakiJagodic\Controller;
 
-use ihrname\SimpleTemplateEngine;
+use MakiJagodic\SimpleTemplateEngine;
 
 class IndexController 
 {
