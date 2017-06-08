@@ -14,13 +14,13 @@ class IndexController
   /**
    * @param ihrname\SimpleTemplateEngine
    */
-  public function __construct(SimpleTemplateEngine $template)
+  public function __construct(\Twig_Environment $template)
   {
      $this->template = $template;
   }
 
   public function homepage() {
-    echo "INDEX";
+    echo $this->template->render("index.html.php");
   }
 
   public function greet($name) {
