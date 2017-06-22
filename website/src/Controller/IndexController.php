@@ -20,10 +20,30 @@ class IndexController
   }
 
   public function homepage() {
-    echo $this->template->render("index.html.php");
+  	if ($_SESSION["email"] != null)
+  	{
+  		echo $this->template->render("index.html.php");
+  	}
+    else 
+    {
+    	echo $this->template->render("login.html.php");
+    }
   }
 
   public function greet($name) {
   	echo $this->template->render("hello.html.php", ["name" => $name]);
   }
+  
+  public function edituser(array $data)
+  {
+  	 
+  	$this->loginService->edituser($data["email"], $data["password"]);
+  	$this->template->render("edituser.html.php");
+  }
+  
+  public function editplan()
+  {
+  	 
+  }
+  
 }

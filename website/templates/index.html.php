@@ -1,45 +1,9 @@
-<?php
-if (!function_exists('array_column')) {
-	die('Minimum PHP Version: 5.5.0');
-}
-
-function call_api($param)
-{
-	$curl = curl_init();
-	$day = 2;
-	curl_setopt_array($curl, array(
-			CURLOPT_RETURNTRANSFER => 1,
-			CURLOPT_URL            => 'http://e2fi.eu/s/api'.$param,
-	));
-
-	$data = curl_exec($curl);
-	curl_close($curl);
-
-	$array = json_decode($data, true);
-	return $array;
-}
-
-// init all days to array
-$days = [];
-for ($i=1; $i <= 5; $i++) {
-	$days[$i] = call_api('/day/'.$i);
-}
-
-// "rotate" the array colums => rows / rows => colums
-for ($i=0; $i <= 10; $i++) {
-	$table_rows[$i] = array_column($days, $i); // need php 5.5 for that (array_column)!
-}
-?>
-
-
 <!DOCTYPE html>
 <html>
 	<head>
 	    <meta charset="UTF-8">
-	    <title>Sample with PHP</title>
-	    <meta name="author" content="gabrielw.de">
-	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <title>Stundenplan</title>
+	    <meta name="MakiJagodic">
 	    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/paper/bootstrap.min.css">
 	    <style>
 	        body {padding-top: 20px; padding-bottom: 20px; }
@@ -58,13 +22,14 @@ for ($i=0; $i <= 10; $i++) {
 	                        <span class="icon-bar"></span>
 	                        <span class="icon-bar"></span>
 	                    </button>
-	                    <a class="navbar-brand" href="#">E2FI - Stundenplan-API</a>
+	                    <a class="navbar-brand" href="#">INFA2A - Stundenplan</a>
 	                </div>
 	                <div class="navbar-collapse collapse">
 	                    <ul class="nav navbar-nav navbar-right">
-	                        <li><a href="#">Version <?= call_api('/')['version'] ?></a></li>
-	                        <li><a href="<?= call_api('/')['documentation_url'] ?>">Doku</a></li>
-	                        <li><a href="#">Letztes Update: <?= call_api('/')['last_update'] ?></a></li>
+	                        <li><a href="editplan">Plan editieren</a></li>
+	                        <li><a href="edituser">Benutzer editieren</a></li>
+	                        <li><a href="login">Abmelden</a></li>
+	                        <li>Email:<?PHP if(isset($_SESSION['email'])){echo $_SESSION['email'];}?></li>
 	                    </ul>
 	                </div>
 	            </div>
@@ -86,7 +51,7 @@ for ($i=0; $i <= 10; $i++) {
 	                    <?php foreach ($table_rows as $row): ?>
 	                        <tr>
 	                            <?php foreach ($row as $item): ?>
-	                                <td data-day="<?= $item['day']?>" class="text-center"><?= $item['hour'].'. '.$item['subject'] ?> </td>
+	                                <td data-day="<?= $item['LektionsTag']?>" class="text-center"><?= $item['LektionsBeginn'].'. '.$item['LektionsEnde'] ?> </td>
 	                            <?php endforeach ?>
 	                        </tr>
 	                    <?php endforeach ?>
