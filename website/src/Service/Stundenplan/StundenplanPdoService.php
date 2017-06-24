@@ -3,6 +3,7 @@ namespace MakiJagodic\Service\Stundenplan;
 
 use MakiJagodic\Service\Stundenplan\StundenplanService;
 use MakiJagodic\Entity\Lektion;
+use MakiJagodic\Entity\Fach;
 
 class StundenplanPdoService implements StundenplanService
 {
@@ -14,10 +15,10 @@ class StundenplanPdoService implements StundenplanService
 	
 	public function getLektionen()
 	{
-		$stmt = $this->pdo->prepare("SELECT * FROM lektion ORDER BY lektionsBeginn");
+		$stmt = $this->pdo->prepare("SELECT * FROM lektion ORDER BY lektionsTag, lektionsBeginn");
 		$stmt->execute();
 		
-		$lektionen = [];
+		// $lektionen = [];
 		
 		while($row = $stmt->fetchObject()) {
 			// $lektionen[] = new Lektion();
@@ -29,6 +30,15 @@ class StundenplanPdoService implements StundenplanService
 		}
 		
 		// return $lektionen;
+	}
+	public function getFach()
+	{
+		$stmt = $this->pdo->prepare("SELECT * FROM fach");
+		$stmt-> execute();
+		while ($row = $stmt->fetchObject()){
+			yield new Fach($row->Id, $row->bezeichnung, $row->kuerzel);
+		}
+		
 	}
 	
 }

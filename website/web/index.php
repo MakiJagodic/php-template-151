@@ -29,6 +29,20 @@ switch($_SERVER["REQUEST_URI"]) {
 			$controller->homepage();
 		}
 		break;
+	case "/edituser":
+		$controller = $factory->getIndexController();
+		if ($_SERVER["REQUEST_METHOD"]=== "GET")
+		{
+			$controller->edituser();
+		}
+		break;
+		case "/editplan":
+			$controller = $factory->getIndexController();
+			if ($_SERVER["REQUEST_METHOD"]=== "GET")
+			{
+				$controller->editplan();
+			}
+			break;
 	default:
 		$matches = [];
 		if(preg_match("|^/hello/(.+)$|", $_SERVER["REQUEST_URI"], $matches)) {

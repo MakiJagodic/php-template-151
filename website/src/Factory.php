@@ -21,7 +21,8 @@ class Factory
 	{
 		return new Controller\IndexController(
 				$this->getTemplateEngine(),
-				$this->getStundenPlanPdoService()
+				$this->getStundenPlanPdoService(),
+				$this->getUserService()
 				);
 	}
 	
@@ -51,5 +52,9 @@ class Factory
 	public function getStundenPlanPdoService()
 	{
 		return new Service\Stundenplan\StundenplanPdoService($this->getPdo());
+	}
+	public function getUserService()
+	{
+		return new Service\User\UserPdoService($this->getPdo());
 	}
 }

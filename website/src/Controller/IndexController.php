@@ -3,6 +3,7 @@
 namespace MakiJagodic\Controller;
 use MakiJagodic\SimpleTemplateEngine;
 use MakiJagodic\Service\Stundenplan\StundenplanService;
+use MakiJagodic\Service\User\UserService;
 
 class IndexController 
 {
@@ -14,17 +15,21 @@ class IndexController
   /**
    * @param ihrname\SimpleTemplateEngine
    */
-  public function __construct(SimpleTemplateEngine $template, StundenplanService $stundenplanService)
+  public function __construct(SimpleTemplateEngine $template, StundenplanService $stundenplanService, UserService $userService)
   {
      $this->template = $template;
      $this->stundenplanService = $stundenplanService;
+     $this->userService = $userService;
   }
 
   public function homepage() {
   	if (!empty($_SESSION["email"]))
   	{
+  		
   		echo $this->template->render("index.html.php", [
-  			"lektionen" => $this->stundenplanService->getLektionen()
+  			"lektionen" => $this->stundenplanService->getLektionen(),
+  				"faecher" => $this->stundenplanService->getFach(),
+  				"rolleId" => $this->userService->getRolleFromUser($_SESSION["email"])
   		]);
   	}
   	else
@@ -32,28 +37,19 @@ class IndexController
   		header("Location: /login");
   	}
   }
-
-  public function greet($name) {
-  	echo $this->template->render("hello.html.php", ["name" => $name]);
-  }
-  
-  public function edituser(array $data)
+  public function edituser()
   {
-  	if ($this->loginService->edituser($data["email"], $data["password"]))
-  	{
-  		
-  		$this->template->render("edituser.html.php");
-  	}
-  	else 
-  	{
-  		
-  	}
-  	
+  	echo $this->template->render("edituser.html.php", [
+  			"users" => $this->userService->getUser()
+  	]);
   }
   
   public function editplan()
   {
-  	 
+  	echo $this->template->render("editplan.html.php", [
+  			"lektionen" => $this->stundenplanService->getLektionen(),
+  				"faecher" => $this->stundenplanService->getFach()
+  	]);
   }
   
 }

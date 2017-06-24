@@ -24,14 +24,23 @@
 	                    </button>
 	                    <a class="navbar-brand" href="#">INFA2A - Stundenplan</a>
 	                </div>
+	                
 	                <div class="navbar-collapse collapse">
 	                    <ul class="nav navbar-nav navbar-right">
-	                        <li><a href="index/editplan">Plan editieren</a></li>
-	                        <li><a href="index/edituser">Benutzer editieren</a></li>
+	                    <?php 
+	                    	if ($rolleId == 2)
+	                    	{
+                    		?>
+	                    		
+                    		<?php 	                    		
+	                    	}
+	                    ?>
+	                    <li><a href="editplan">Plan editieren</a></li>
+	                        	<li><a href="edituser">Benutzer editieren</a></li>
 	                        <li><a href="login">Abmelden</a></li>
-	                        <li>Email:<?PHP if(isset($_SESSION['email'])){echo $_SESSION['email'];}?></li>
 	                    </ul>
 	                </div>
+	                Email:<?PHP if(isset($_SESSION['email'])){echo $_SESSION['email'];}?>
 	            </div>
 	        </div>
 	
@@ -48,21 +57,42 @@
 	                    </tr>
 	                </thead>
 	                <tbody>
-	                
-	                    <?php 
-	                    	var_dump("Test");
+	                <?php 
+	                echo "Momentane Fächer: </br>";
+	                foreach ($faecher as $fach)
+	                {
+	                	?>
+	                	<tr>
+	              		<?php
+	                	echo "{$fach->getId()} - {$fach->getBezeichnung()} - {$fach->getKuerzel()} </br>" ;
+	                	?>
+	                	</tr>
+	                	<?php 
+	                }
+	                ?>
+	                <tr>
+	                	<?php 
+	                		$lektionsTag = 1;
 	                    	foreach ($lektionen as $lektion) {
-	                    		echo $lektion->getLektionsTag();
-	                    		echo $lektion->getLetkionsBeginn();
-	                    		echo $lektion->getFach->bezeichnung();
-	                    		echo $lektion->getFach->kuerzel();
-	                    		echo sprintf('<tr>
-	                                 <td data-day="%s" class="text-center" data-start="%s" data-End="%s"></td>
-		                        </tr>', $lektion->getLektionsTag(),
-	                    				$lektion->getLetkionsBeginn(),
-	                    				$letkion->getLetkionsEnde());
+	                    		if ($lektion->getLektionsTag() == $lektionsTag)
+	                    		{
+	                    			?>
+	                    			<tr>
+	                    			<?php 
+	                    		}
+	                    		else
+	                    		{
+	                    			$lektionsTag = $lektion->getLektionsTag();
+	                    			?>
+	                    			<td>
+	                    			<?php 
+	                    		}
+	                    		
+	                    		echo "Lektionstag: {$lektion->getLektionsTag()}Fach: {$lektion->GetFach()}, {$lektion->getLetkionsBeginn()} - {$lektion->getLetkionsEnde()}";
+	                    		 
 	                    	}
                         ?>
+                        </tr>
 	                </tbody>
 	            </table>
 	        </div>
