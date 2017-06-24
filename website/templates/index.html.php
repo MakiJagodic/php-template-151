@@ -26,8 +26,8 @@
 	                </div>
 	                <div class="navbar-collapse collapse">
 	                    <ul class="nav navbar-nav navbar-right">
-	                        <li><a href="editplan">Plan editieren</a></li>
-	                        <li><a href="edituser">Benutzer editieren</a></li>
+	                        <li><a href="index/editplan">Plan editieren</a></li>
+	                        <li><a href="index/edituser">Benutzer editieren</a></li>
 	                        <li><a href="login">Abmelden</a></li>
 	                        <li>Email:<?PHP if(isset($_SESSION['email'])){echo $_SESSION['email'];}?></li>
 	                    </ul>
@@ -48,7 +48,7 @@
 	                    </tr>
 	                </thead>
 	                <tbody>
-	                    <?php foreach ($table_rows as $row): ?>
+	                    <?php foreach ($lektionen as $row): ?>
 	                        <tr>
 	                            <?php foreach ($row as $item): ?>
 	                                <td data-day="<?= $item['LektionsTag']?>" class="text-center"><?= $item['LektionsBeginn'].'. '.$item['LektionsEnde'] ?> </td>

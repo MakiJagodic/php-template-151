@@ -15,7 +15,7 @@
 			<form method="post">
 			<div align="center">
 				<div>
-					Email: <input type="text" name="email" value="<?= (isset($email)) ? $email: "" ?>"><br>
+					Email: <input type="text" name="email"><br>
 				</div>
 				<div>
 					Passwort: <input type="password" name="password"><br>

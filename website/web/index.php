@@ -22,6 +22,13 @@ switch($_SERVER["REQUEST_URI"]) {
 			$controller->login($_POST);
 		}
 		break;
+	case "/index":
+		$controller = $factory->getIndexController();
+		if ($_SERVER["REQUEST_METHOD"] === "GET")
+		{
+			$controller->homepage();
+		}
+		break;
 	default:
 		$matches = [];
 		if(preg_match("|^/hello/(.+)$|", $_SERVER["REQUEST_URI"], $matches)) {

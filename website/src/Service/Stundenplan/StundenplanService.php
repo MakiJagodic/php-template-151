@@ -3,5 +3,5 @@ namespace MakiJagodic\Service\Stundenplan;
 
 interface StundenplanService
 {
-	public function getLektionen($email);
+	public function getLektionen();
 }

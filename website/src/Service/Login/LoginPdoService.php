@@ -19,9 +19,7 @@ class LoginPdoService implements LoginService
 		$stmt->bindValue(2, $email);
 		
 		$stmt->execute();
-		
-		// Redirect und Session rausnehmen
-		header("Location: /");
+		return $stmt->rowCount() == 1;
 	}
 	
 	public function register($email, $password)
@@ -30,10 +28,6 @@ class LoginPdoService implements LoginService
 		$stmt->bindValue(1, $email);
 		$stmt->bindValue(2, $password);
 		$stmt->execute();
-		// Redirect und Session rausnehmen
-		$_SESSION["email"] = $email;
-		
-		header("Location: /");
 	}
 	
 	public function authenticateregistration($email)
@@ -42,14 +36,7 @@ class LoginPdoService implements LoginService
 		$stmt->bindValue(1, $email);
 		$stmt->execute();
 			
-		if($stmt->rowCount() == 1)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return $stmt->rowCount() == 1;
 	}
 	
 	public function authenticate($email, $password)

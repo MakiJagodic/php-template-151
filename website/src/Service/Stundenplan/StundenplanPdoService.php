@@ -12,12 +12,23 @@ class StundenplanPdoService implements StundenplanService
 		$this->pdo = $pdo;
 	}
 	
-	public function getLektionen($email)
+	public function getLektionen()
 	{
-		$stmt = $this->pdo->prepare("SELECT * FROM lektion");
+		$stmt = $this->pdo->prepare("SELECT * FROM lektion ORDER BY lektionsBeginn");
 		$stmt->execute();
-			
-		return $stmt;
+		
+		$lektionen = [];
+		
+		while($row = $stmt->fetchObject()) {
+			// $lektionen[] = new Lektion();
+			yield new Lektion($Id->Id, 
+					$row->fach, 
+					$row->lektionsTag, 
+					$row->lektionsBeginn, 
+					$row->lektionsEnde);
+		}
+		
+		// return $lektionen;
 	}
 	
 }

@@ -1,10 +1,7 @@
 <?php
-
 namespace MakiJagodic\Controller;
-
 use MakiJagodic\SimpleTemplateEngine;
 use MakiJagodic\Service\Login\LoginService;
-
 class LoginController 
 {
   /**
@@ -21,33 +18,9 @@ class LoginController
      $this->template = $template;
      $this->loginService = $loginService;
   }
-
   public function showLogin()
   {
-  	session_regenerate_id();
   	echo $this->template->render("login.html.php");
-  }
-  
-  public function register(array $data)
-  {
-  	if (!array_key_exists("email", $data) OR !array_key_exists("password", $data))
-  	{
-  		$this->showLogin();
-  		return;
-  	}
-  	if($this->loginService->authenticateregistration($data["email"]))
-  	{
-  		$this->showLogin();
-  		return;
-  	}
-  	else
-  	{
-  		echo $this->template->render("login.html.php",
-  				["email" => $data["email"]]
-  				);
-  	}
-  	$this->loginService->register($data["email"], $data["password"]);
-  	
   }
   
   public function login(array $data)
@@ -62,19 +35,18 @@ class LoginController
   		echo $this->template->render("pwaendern.html.php",
   				["email" => $data["email"]]
   				);
-  		return;
   	}
+  	
   	if (!array_key_exists("email", $data) OR !array_key_exists("password", $data))
   	{
   		$this->showLogin();
   		return;
   	}
-  	
   	if($this->loginService->authenticate($data["email"], $data["password"]))
   	{
-  		//$_SESSION["email"] = $email;
-  		header("Location: /");
-  		// session_regenerate_id();
+  		$_SESSION["email"] = $data["email"];
+  		header("Location: /index");
+  		session_regenerate_id();
   	}
   	else
   	{
@@ -82,5 +54,27 @@ class LoginController
   				["email" => $data["email"]]
   			);
   	}
+  }
+  
+  public function register(array $data)
+  {
+  	if (!array_key_exists("email", $data) OR !array_key_exists("password", $data))
+  	{
+  		$this->showLogin();
+  	}
+  	if($this->oginService->authenticateregistration($data["email"]))
+  	{
+  		$this->showLogin();
+  		return;
+  	}
+  	else
+  	{
+  		echo $this->template->render("login.html.php",
+  				["email" => $data["email"]]
+  				);
+  	}
+  	$this->loginService->register($data["email"], $data["password"]);
+  	$_SESSION["email"] = $data["email"];
+  	echo $this->template->render("index.html.php");
   }
 }

@@ -20,7 +20,8 @@ class Factory
 	public function getIndexController()
 	{
 		return new Controller\IndexController(
-				$this->getTwigEngine()
+				$this->getTwigEngine(),
+				$this->getStundenPlanPdoService()
 				);
 	}
 	
@@ -46,5 +47,9 @@ class Factory
 	public function getLoginPdoService()
 	{
 		return new Service\Login\LoginPdoService($this->getPdo());
+	}
+	public function getStundenPlanPdoService()
+	{
+		return new Service\Stundenplan\StundenplanPdoService($this->getPdo());
 	}
 }

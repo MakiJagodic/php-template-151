@@ -1,8 +1,8 @@
 <?php
 
 namespace MakiJagodic\Controller;
-
 use MakiJagodic\SimpleTemplateEngine;
+use MakiJagodic\Service\Stundenplan\StundenplanService;
 
 class IndexController 
 {
@@ -14,20 +14,23 @@ class IndexController
   /**
    * @param ihrname\SimpleTemplateEngine
    */
-  public function __construct(\Twig_Environment $template)
+  public function __construct(\Twig_Environment $template, StundenplanService $stundenplanService)
   {
      $this->template = $template;
+     $this->stundenplanService = $stundenplanService;
   }
 
   public function homepage() {
-  	if ($_SESSION["email"] != null)
+  	if (!empty($_SESSION["email"]))
   	{
-  		echo $this->template->render("index.html.php");
+  		echo $this->template->render("index.html.php", [
+  			"lektionen" => $this->stundenplanService->getLektionen()
+  		]);
   	}
-    else 
-    {
-    	echo $this->template->render("login.html.php");
-    }
+  	else
+  	{
+  		header("Location: /login");
+  	}
   }
 
   public function greet($name) {
@@ -36,9 +39,16 @@ class IndexController
   
   public function edituser(array $data)
   {
-  	 
-  	$this->loginService->edituser($data["email"], $data["password"]);
-  	$this->template->render("edituser.html.php");
+  	if ($this->loginService->edituser($data["email"], $data["password"]))
+  	{
+  		
+  		$this->template->render("edituser.html.php");
+  	}
+  	else 
+  	{
+  		
+  	}
+  	
   }
   
   public function editplan()
