@@ -40,7 +40,7 @@ switch($_SERVER["REQUEST_URI"]) {
 			$controller = $factory->getIndexController();
 			if ($_SERVER["REQUEST_METHOD"]=== "GET")
 			{
-				$controller->editplan();
+				$controller->editplan($_POST);
 			}
 			break;
 	default:

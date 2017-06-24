@@ -77,14 +77,14 @@
 	                    		if ($lektion->getLektionsTag() == $lektionsTag)
 	                    		{
 	                    			?>
-	                    			<tr>
+	                    			<td>
 	                    			<?php 
 	                    		}
 	                    		else
 	                    		{
 	                    			$lektionsTag = $lektion->getLektionsTag();
 	                    			?>
-	                    			<td>
+	                    			<tr>
 	                    			<?php 
 	                    		}
 	                    		

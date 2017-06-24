@@ -35,7 +35,7 @@
 	                Email:<?PHP if(isset($_SESSION['email'])){echo $_SESSION['email'];}?>
 	            </div>
 	        </div>
-	
+			
 	        <h3>Edit Plan</h3>
 	        	<?php 
                 echo "Momentane Fächer: </br>";
@@ -48,6 +48,10 @@
                 	<?php 
                 }
                 ?>
+                <div>
+                	<h3>Info:</h3>
+                	<p>Der Lektions Tag hat die Nummer des Wochentages, an welchem die Lektion stattfindet.</p>
+                </div>
 	        <form method="post">
 		        <table>
 		        <?php 
@@ -55,15 +59,26 @@
 		        	{
 		        		?>
 		        		<tr> 
-		                <td>Fach</td>
-		                <td><input type="hidden" name="id" value="<?php echo $user->getId(); ?>"></td>
-		                <td><input type="text" name="name" value="<?php echo $user->getEmail(); ?>"></td>
+		                <td><h4>Fach (In Legende abgleichen)</h4></td>
+		                <td><input type="hidden" name="id" value="<?php echo $lektion->getId(); ?>"></td>
+		                <td><input type="text" name="fach" value="<?php echo $lektion->getFach(); ?>"></td>
 			            </tr>
 			            <tr> 
-			                <td>Rollen Id (1 für Schüler, 2 für Admin)</td>
+			                <td>LektionsTag</td>
 			                <td></td>
-			                <td><input type="text" name="age" value="<?php echo $user->getRolleId(); ?>"></td>
+			                <td><input type="text" name="lektionsTag" value="<?php echo $lektion->getLektionsTag(); ?>"></td>
 			            </tr>
+			            <tr> 
+			                <td>Lektions Beginn</td>
+			                <td></td>
+			                <td><input type="text" name="lektionsBeginn" value="<?php echo $lektion->getLetkionsBeginn(); ?>"></td>
+			            </tr>
+			            <tr> 
+			                <td>Lektions Ende</td>
+			                <td></td>
+			                <td><input type="text" name="lektionsEnde" value="<?php echo $lektion->getLetkionsEnde(); ?>"></td>
+			            </tr>
+			            
 			            
 		        		<?php
 		        	}

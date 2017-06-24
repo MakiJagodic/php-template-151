@@ -44,13 +44,15 @@ class IndexController
   		die("update");
   		$this->userService->updateUser($data);
   		header("Location: /index");
-  		die("returnupdate");
   		return;
   	}
   	if (isset($_POST['cancle']))
   	{
-  		die("cancle");
-  		header("Location: /index");
+  		echo $this->template->render("index.html.php", [
+  				"lektionen" => $this->stundenplanService->getLektionen(),
+  				"faecher" => $this->stundenplanService->getFach(),
+  				"rolleid" => $this->userService->getRolleFromUser($_SESSION["email"])
+  		]);
   		return;
   	}
   	echo $this->template->render("edituser.html.php", [
@@ -58,8 +60,23 @@ class IndexController
   	]);
   }
   
-  public function editplan()
+  public function editplan(array $data)
   {
+  	if (isset($_POST['update']))
+  	{
+  		// this-> updateplan
+  		header("Location: /index");
+  		return;
+  	}
+  	if (isset($_POST['cancle']))
+  	{
+  		echo $this->template->render("index.html.php", [
+  				"lektionen" => $this->stundenplanService->getLektionen(),
+  				"faecher" => $this->stundenplanService->getFach(),
+  				"rolleid" => $this->userService->getRolleFromUser($_SESSION["email"])
+  		]);
+  		return;
+  	}
   	echo $this->template->render("editplan.html.php", [
   			"lektionen" => $this->stundenplanService->getLektionen(),
   				"faecher" => $this->stundenplanService->getFach()

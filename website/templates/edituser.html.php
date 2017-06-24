@@ -46,12 +46,12 @@
 		        		<tr> 
 		                <td>Email</td>
 		                <td><input type="hidden" name="id" value="<?php echo $user->getId(); ?>"></td>
-		                <td><input type="text" name="name" value="<?php echo $user->getEmail(); ?>"></td>
+		                <td><input type="text" name="email" value="<?php echo $user->getEmail(); ?>"></td>
 			            </tr>
 			            <tr> 
 			                <td>Rollen Id (1 für Schüler, 2 für Admin)</td>
 			                <td></td>
-			                <td><input type="text" name="age" value="<?php echo $user->getRolleId(); ?>"></td>
+			                <td><input type="text" name="rolleid" value="<?php echo $user->getRolleId(); ?>"></td>
 			            </tr>
 			            
 		        		<?php
