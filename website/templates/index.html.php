@@ -49,13 +49,20 @@
 	                </thead>
 	                <tbody>
 	                
-	                    <?php foreach ($lektionen as $row): ?>
-	                        <tr>
-	                            <?php foreach ($row as $item): ?>
-	                                <td data-day="<?= $item['lektionsTag']?>" class="text-center"><?= $item['lektionsBeginn'].'. '.$item['lektionsEnde'] ?> </td>
-	                            <?php endforeach ?>
-	                        </tr>
-	                    <?php endforeach ?>
+	                    <?php 
+	                    	var_dump("Test");
+	                    	foreach ($lektionen as $lektion) {
+	                    		echo $lektion->getLektionsTag();
+	                    		echo $lektion->getLetkionsBeginn();
+	                    		echo $lektion->getFach->bezeichnung();
+	                    		echo $lektion->getFach->kuerzel();
+	                    		echo sprintf('<tr>
+	                                 <td data-day="%s" class="text-center" data-start="%s" data-End="%s"></td>
+		                        </tr>', $lektion->getLektionsTag(),
+	                    				$lektion->getLetkionsBeginn(),
+	                    				$letkion->getLetkionsEnde());
+	                    	}
+                        ?>
 	                </tbody>
 	            </table>
 	        </div>

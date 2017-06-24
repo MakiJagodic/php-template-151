@@ -20,7 +20,7 @@ class Factory
 	public function getIndexController()
 	{
 		return new Controller\IndexController(
-				$this->getTwigEngine(),
+				$this->getTemplateEngine(),
 				$this->getStundenPlanPdoService()
 				);
 	}

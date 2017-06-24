@@ -1,4 +1,7 @@
 <?php
+
+namespace MakiJagodic\Entity;
+
 class Lektion {
 	private $Id;
 	private $fach;
@@ -6,7 +9,7 @@ class Lektion {
 	private $lektionsBeginn;
 	private $lektionsEnde;
 	
-	function __construct()
+	function __construct($newId, $newFach, $newLektionsTag, $newLektionsBeginn, $newLektionsEnde)
 	{
 		$this->Id = $newId;
 		$this->fach = $newFach;
@@ -15,23 +18,23 @@ class Lektion {
 		$this->lektionsEnde = $newLektionsEnde;
 	}
 	
-	function get_Id($newId)
+	function getId()
 	{
 		return $this->Id;
 	}
-	function get_fach($newFach) 
+	function getFach() 
 	{ 
 		return $this->fach; 
 	}
-	function get_lektionsTag($newLektionsTag)
+	function getLektionsTag()
 	{
 		return $this->lektionsTag;
 	}
-	function get_letkionsBeginn($newLektionsBeginn)
+	function getLetkionsBeginn()
 	{
 		return $this->lektionsBeginn;
 	}
-	function get_letkionsEnde($newLektionsEnde)
+	function getLetkionsEnde()
 	{
 		return $this->lektionsEnde;
 	}

@@ -14,7 +14,7 @@ class IndexController
   /**
    * @param ihrname\SimpleTemplateEngine
    */
-  public function __construct(\Twig_Environment $template, StundenplanService $stundenplanService)
+  public function __construct(SimpleTemplateEngine $template, StundenplanService $stundenplanService)
   {
      $this->template = $template;
      $this->stundenplanService = $stundenplanService;

@@ -2,7 +2,7 @@
 namespace MakiJagodic\Service\Stundenplan;
 
 use MakiJagodic\Service\Stundenplan\StundenplanService;
-
+use MakiJagodic\Entity\Lektion;
 
 class StundenplanPdoService implements StundenplanService
 {
@@ -21,7 +21,7 @@ class StundenplanPdoService implements StundenplanService
 		
 		while($row = $stmt->fetchObject()) {
 			// $lektionen[] = new Lektion();
-			yield new Lektion($Id->Id, 
+			yield new Lektion($row->Id, 
 					$row->fach, 
 					$row->lektionsTag, 
 					$row->lektionsBeginn, 
