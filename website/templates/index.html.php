@@ -27,16 +27,16 @@
 	                
 	                <div class="navbar-collapse collapse">
 	                    <ul class="nav navbar-nav navbar-right">
-	                    <?php 
-	                    	if ($rolleId == 2)
+	                    <?php
+	                    	if ($rolleid[0] == 2)
 	                    	{
                     		?>
-	                    		
+	                    		<li><a href="editplan">Plan editieren</a></li>
+	                        	<li><a href="edituser">Benutzer editieren</a></li>
                     		<?php 	                    		
 	                    	}
 	                    ?>
-	                    <li><a href="editplan">Plan editieren</a></li>
-	                        	<li><a href="edituser">Benutzer editieren</a></li>
+	                    
 	                        <li><a href="login">Abmelden</a></li>
 	                    </ul>
 	                </div>

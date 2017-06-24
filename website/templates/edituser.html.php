@@ -45,19 +45,22 @@
 		        		?>
 		        		<tr> 
 		                <td>Email</td>
-		                <td><input type="text" name="name" value="<?php $user->getEmail() ?>"></td>
+		                <td><input type="hidden" name="id" value="<?php echo $user->getId(); ?>"></td>
+		                <td><input type="text" name="name" value="<?php echo $user->getEmail(); ?>"></td>
 			            </tr>
 			            <tr> 
 			                <td>Rollen Id (1 für Schüler, 2 für Admin)</td>
-			                <td><input type="text" name="age" value="<?php $user->getRolleId() ?>"></td>
+			                <td></td>
+			                <td><input type="text" name="age" value="<?php echo $user->getRolleId(); ?>"></td>
 			            </tr>
-			            <tr>
-			                <td><input type="submit" name="update" value="Speichern"></td>
-			                <td><input type="submit" name="cancle" value="Abbrechen"></td>
-		            	</tr>
+			            
 		        		<?php
 		        	}
 		        ?>
+		        <tr>
+					<td><input type="submit" name="update" value="Speichern"></td>
+					<td><input type="submit" name="cancle" value="Abbrechen"></td>
+		       	</tr>
 		        </table>
 		    </form>
 	    </div>

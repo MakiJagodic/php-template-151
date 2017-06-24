@@ -37,6 +37,43 @@
 	        </div>
 	
 	        <h3>Edit Plan</h3>
+	        	<?php 
+                echo "Momentane Fächer: </br>";
+                foreach ($faecher as $fach)
+                {
+                	?>
+              		<?php
+                	echo "{$fach->getId()} - {$fach->getBezeichnung()} - {$fach->getKuerzel()} </br>" ;
+                	?>
+                	<?php 
+                }
+                ?>
+	        <form method="post">
+		        <table>
+		        <?php 
+		        	foreach ($lektionen as $lektion)
+		        	{
+		        		?>
+		        		<tr> 
+		                <td>Fach</td>
+		                <td><input type="hidden" name="id" value="<?php echo $user->getId(); ?>"></td>
+		                <td><input type="text" name="name" value="<?php echo $user->getEmail(); ?>"></td>
+			            </tr>
+			            <tr> 
+			                <td>Rollen Id (1 für Schüler, 2 für Admin)</td>
+			                <td></td>
+			                <td><input type="text" name="age" value="<?php echo $user->getRolleId(); ?>"></td>
+			            </tr>
+			            
+		        		<?php
+		        	}
+		        ?>
+		        <tr>
+					<td><input type="submit" name="update" value="Speichern"></td>
+					<td><input type="submit" name="cancle" value="Abbrechen"></td>
+		       	</tr>
+		        </table>
+		    </form>
 	    </div>
 	    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>

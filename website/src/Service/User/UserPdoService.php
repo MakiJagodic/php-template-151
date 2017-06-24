@@ -20,14 +20,24 @@ class UserPdoService implements UserService
 			// $lektionen[] = new Lektion();
 			yield new User($row->Id,
 					$row->email,
-					$row->rolleId);
+					$row->rolleid);
 		}
 	}
 	public function getRolleFromUser($email)
 	{
-		$stmt = $this->pdo->prepare("SELECT rolleId FROM user WHERE email=?");
+		$stmt = $this->pdo->prepare("SELECT rolleid FROM user WHERE email=?");
 		$stmt->bindValue(1, $email);
 		$stmt->execute();
-		return intval($stmt->fetch());
+		return $stmt->fetch();
+	}
+	public function updateUser($data)
+	{
+		foreach ($data as $user)
+		$stmt = $this->pdo->prepare("Update user Set rolleid=? WHERE email=?");
+		$stmt->bindValue(1, $user["rolleid"]);
+		$stmt->bindValue(2, $user["email"]);
+		
+		$stmt->execute();
+		return $stmt->rowCount() == 1;
 	}
 }

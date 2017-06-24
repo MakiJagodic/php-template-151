@@ -5,4 +5,5 @@ interface UserService
 {
 	public function getUser();
 	public function getRolleFromUser($email);
+	public function updateUser($data);
 }

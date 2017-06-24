@@ -33,7 +33,7 @@ switch($_SERVER["REQUEST_URI"]) {
 		$controller = $factory->getIndexController();
 		if ($_SERVER["REQUEST_METHOD"]=== "GET")
 		{
-			$controller->edituser();
+			$controller->edituser($_POST);
 		}
 		break;
 		case "/editplan":
@@ -44,11 +44,6 @@ switch($_SERVER["REQUEST_URI"]) {
 			}
 			break;
 	default:
-		$matches = [];
-		if(preg_match("|^/hello/(.+)$|", $_SERVER["REQUEST_URI"], $matches)) {
-			$factory->getIndexController()->greet($matches[1]);
-			break;
-		}
 		echo "Not Found";
 }
 

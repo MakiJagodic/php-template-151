@@ -29,7 +29,7 @@ class IndexController
   		echo $this->template->render("index.html.php", [
   			"lektionen" => $this->stundenplanService->getLektionen(),
   				"faecher" => $this->stundenplanService->getFach(),
-  				"rolleId" => $this->userService->getRolleFromUser($_SESSION["email"])
+  				"rolleid" => $this->userService->getRolleFromUser($_SESSION["email"])
   		]);
   	}
   	else
@@ -37,8 +37,22 @@ class IndexController
   		header("Location: /login");
   	}
   }
-  public function edituser()
+  public function edituser(array $data)
   {
+  	if (isset($_POST['update']))
+  	{
+  		die("update");
+  		$this->userService->updateUser($data);
+  		header("Location: /index");
+  		die("returnupdate");
+  		return;
+  	}
+  	if (isset($_POST['cancle']))
+  	{
+  		die("cancle");
+  		header("Location: /index");
+  		return;
+  	}
   	echo $this->template->render("edituser.html.php", [
   			"users" => $this->userService->getUser()
   	]);
