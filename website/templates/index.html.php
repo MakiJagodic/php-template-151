@@ -48,10 +48,11 @@
 	                    </tr>
 	                </thead>
 	                <tbody>
+	                
 	                    <?php foreach ($lektionen as $row): ?>
 	                        <tr>
 	                            <?php foreach ($row as $item): ?>
-	                                <td data-day="<?= $item['LektionsTag']?>" class="text-center"><?= $item['LektionsBeginn'].'. '.$item['LektionsEnde'] ?> </td>
+	                                <td data-day="<?= $item['lektionsTag']?>" class="text-center"><?= $item['lektionsBeginn'].'. '.$item['lektionsEnde'] ?> </td>
 	                            <?php endforeach ?>
 	                        </tr>
 	                    <?php endforeach ?>

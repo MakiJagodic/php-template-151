@@ -62,7 +62,7 @@ class LoginController
   	{
   		$this->showLogin();
   	}
-  	if($this->oginService->authenticateregistration($data["email"]))
+  	if($this->loginService->authenticateregistration($data["email"]))
   	{
   		$this->showLogin();
   		return;
